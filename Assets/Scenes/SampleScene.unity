@@ -238,6 +238,12 @@ MonoBehaviour:
   tilePrefab_: {fileID: 5449301301767301569, guid: ce3bf5da457fc1c40b3828f5c212e6c6,
     type: 3}
   cam_: {fileID: 519420032}
+  points:
+  - {x: 2, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
 --- !u!4 &1496651926
 Transform:
   m_ObjectHideFlags: 0

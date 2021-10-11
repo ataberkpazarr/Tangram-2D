@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int width_ , height_;
     [SerializeField] private Tile tilePrefab_;
     [SerializeField] private Transform cam_;
+    [SerializeField] private Vector3[] points;
 
     private Dictionary<Vector2, Tile> all_tiles;
 
@@ -46,4 +47,19 @@ public class GridManager : MonoBehaviour
         return null;
         
     }
-}
+
+    private void OnDrawGizmos() // a line should be drawn by one position to next position in path, except the last position since it will not have a next position 
+    {
+        for (int i = 0; i < width_; i++)
+        {
+            for (int k = 0; k < height_; k++)
+            {
+                Gizmos.color = Color.green;
+                Vector2 pos = new Vector2(i,k);
+                Gizmos.DrawSphere(pos, 0.08f);
+            }
+        }
+        
+
+    }
+ }
