@@ -9,6 +9,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile tilePrefab_;
     [SerializeField] private Transform cam_;
     [SerializeField] private Vector3[] points;
+    [SerializeField] private Material transparentMat;
+
 
     private Dictionary<Vector2, Tile> all_tiles;
 
@@ -25,7 +27,13 @@ public class GridManager : MonoBehaviour
             {
                 var spawnedTile = Instantiate(tilePrefab_,new Vector3(x,y),Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
+                //SpriteRenderer sp = spawnedTile.GetComponent<SpriteRenderer>();
+                //sp.material.renderQueue = 4000;
+                //sp.material = transparentMat;
 
+                //sp.sortingOrder = sp.sortingOrder - 1;
+                
+                //sp.sortingLayerName = "top";
                 var isOffset = (x % 2 != 0 && y % 2 == 0) || (x%2==0&& y %2!=0); // different colorization
                 spawnedTile.Init(isOffset);
 
@@ -48,7 +56,7 @@ public class GridManager : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos() // a line should be drawn by one position to next position in path, except the last position since it will not have a next position 
+    private void OnDrawGizmos() 
     {
         for (int i = 0; i < width_; i++)
         {
