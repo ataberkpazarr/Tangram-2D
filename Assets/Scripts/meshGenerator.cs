@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class meshGenerator : MonoBehaviour
 {
+    [SerializeField] private GameObject subColliderPrefab;
     Mesh mesh_;
 
     Vector3[] vertices;
@@ -17,8 +18,17 @@ public class meshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh=mesh_;
         gameObject.AddComponent<MeshRenderer>();
         MeshRenderer a = GetComponent<MeshRenderer>();
-        a.material.renderQueue = 4001;
+
+        //GameObject renderingQueueObject_ =  GameObject.Find("puzzleInstance");
+        //SpriteRenderer s = renderingQueueObject_.GetComponent<SpriteRenderer>();
+        
+        a.sortingLayerName ="top";
+        a.material.renderQueue = 4000;
+
+        //a.material.renderQueue = s.material.renderQueue;
         CreateShape();
+        gameObject.AddComponent<PuzzlePiece>();
+        
         //gameObject.AddComponent<BoxCollider2D>(); 
         //gameObject.AddComponent<PuzzlePiece>();
 
@@ -33,7 +43,7 @@ public class meshGenerator : MonoBehaviour
     void Update()
     {
         updateMesh();
-        CreateShape2();
+        //CreateShape2();
 
     }
 
@@ -41,21 +51,46 @@ public class meshGenerator : MonoBehaviour
     {
         vertices = new Vector3[]
         {
-            /*
-            new Vector3(0,0,0),
             new Vector3(0,0.5f,0),
-            new Vector3(0.5f,0,0),*/
+            new Vector3(0,0,0),
+            new Vector3(0.5f,0,0),
+            new Vector3(0.5f,0.5f,0),
+            new Vector3(0.75f,0.75f,0),
+            new Vector3(1f,0.5f,0)
+
             
-            
+            /*
             new Vector3(0,0.5f,0),
             new Vector3(0.5f,0.5f,0),
             new Vector3(0.5f,0,0)
+            */
         };
 
         triangles = new int[]
         {
-            0, 1, 2    
+            //0,2,1
+            0,2,1,0,3,2,4,5,3
+            //2,1,0,3,5,4
+            //1,0,3,4,5,2
+            //2,1,0,3,4,5,1,2,3
+           // 0,3,4,5,2,1
+            //2,1,5,4,3,0
+            //0,3,4,5,1,2
+            //0, 1, 2,3,4,5    
         };
+
+        gameObject.AddComponent<PolygonCollider2D>();
+        PolygonCollider2D polCol = gameObject.GetComponent<PolygonCollider2D>();
+        polCol.pathCount = vertices.Length;
+         List <Vector2> vec2Arr = new List<Vector2>();
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            vec2Arr.Add(vertices[i]);
+            GameObject gam =Instantiate(subColliderPrefab, vertices[i], Quaternion.identity);
+            gam.transform.SetParent(this.transform);
+        }
+        polCol.SetPath(0, vec2Arr);
+        //polCol.isTrigger = true;
 
     }
 
