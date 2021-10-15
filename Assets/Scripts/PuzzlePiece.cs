@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
 {
+
+    [SerializeField] private Transform point1;
+    [SerializeField] private Transform point2;
+    [SerializeField] private Transform point3;
+    [SerializeField] private Transform point4;
+    [SerializeField] private Rigidbody2D rb;
+  
+
+
     private float startPosX;
     private float startPosY;
     private bool isBeingHeld = false; // if our mouse is holds the piece right now or not
     private Vector3 currentMousePos;
+    private bool notTakenYet = true;
 
     private Mesh me;
-    private void Start()
-    {
-        //gameObject.AddComponent<MeshRenderer>();
-        //me = GetComponent<Mesh>();
-    }
+
 
 
     void Update()
@@ -27,7 +33,6 @@ public class PuzzlePiece : MonoBehaviour
             gameObject.transform.localPosition = new Vector3(currentMousePos.x-startPosX, currentMousePos.y-startPosY,0);
         }
 
-        //Debug.Log(me.vertices);
 
     }
 
@@ -49,4 +54,6 @@ public class PuzzlePiece : MonoBehaviour
         isBeingHeld = false;
 
     }
+    
+ 
 }

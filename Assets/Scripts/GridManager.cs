@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GridManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform cam_;
     [SerializeField] private Vector3[] points;
     [SerializeField] private Material transparentMat;
-
+    [SerializeField] private GameObject pointPrefab;
 
     private Dictionary<Vector2, Tile> all_tiles;
 
@@ -39,6 +40,18 @@ public class GridManager : MonoBehaviour
 
                 all_tiles[new Vector2(x, y)] = spawnedTile;
 
+                Instantiate(pointPrefab, new Vector3(x, y), Quaternion.identity);
+                Instantiate(pointPrefab, new Vector3(x-0.5f, y+0.5f), Quaternion.identity);
+                Instantiate(pointPrefab, new Vector3(x+0.5f, y+0.5f), Quaternion.identity);
+
+                if ( y == 0)
+                {
+                    Debug.Log("eeee");
+                    Instantiate(pointPrefab, new Vector3(x - 0.5f, y - 0.5f), Quaternion.identity);
+                    Instantiate(pointPrefab, new Vector3(x + 0.5f, y - 0.5f), Quaternion.identity);
+                }
+
+
             }
         }
 
@@ -55,7 +68,7 @@ public class GridManager : MonoBehaviour
         return null;
         
     }
-
+    /*
     private void OnDrawGizmos() 
     {
         for (int i = 0; i < width_; i++)
@@ -69,5 +82,5 @@ public class GridManager : MonoBehaviour
         }
         
 
-    }
+    }*/
  }
