@@ -44,6 +44,16 @@ public class GridManager : MonoBehaviour
                 Instantiate(pointPrefab, new Vector3(x-0.5f, y+0.5f), Quaternion.identity);
                 Instantiate(pointPrefab, new Vector3(x+0.5f, y+0.5f), Quaternion.identity);
 
+                //gameObject.AddComponent<meshManager>();
+                //meshManager m = gameObject.GetComponent<meshManager>();
+                //m.createRequiredMesh(x,y);
+
+
+                //gameObject.AddComponent<meshGenerator>();
+                //meshGenerator m  = gameObject.GetComponent<meshGenerator>();
+                //meshManager.Instance.createRequiredMesh(x,y);
+                //createRequiredMesh(x,y);
+
                 if ( y == 0)
                 {
                     Debug.Log("eeee");
@@ -56,6 +66,11 @@ public class GridManager : MonoBehaviour
         }
 
         cam_.transform.position = new Vector3((float)width_/2 -0.5f,(float)height_/2-0.5f,-10);
+    }
+
+    private void createRequiredMesh(int x_, int y_)
+    { 
+    
     }
 
     public Tile getTileAtPosition(Vector2 pos) // if the tile is avaliable we will simply return that tile, otherwise null. For getting tile at current position

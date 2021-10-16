@@ -35,9 +35,45 @@ public class meshGenerator : MonoBehaviour
        
     }
 
-    public void createTriangle()
-    { 
-        
+    public void createRequiredMesh(int x_, int y_)
+    {
+        vertices = new Vector3[]
+       {
+           new Vector3(x_,y_,0),
+           new Vector3(x_-0.5f,y_+0.5f,0),
+           new Vector3(x_,y_+0.5f,0),
+           new Vector3(x_+0.5f,y_+0.5f,0),
+           new Vector3(x_+0.5f,y_,0),
+           new Vector3(x_+0.5f,y_-0.5f,0),
+           new Vector3(x_,y_-0.5f,0),
+           new Vector3(x_-0.5f,y_-0.5f,0),
+           new Vector3(x_-0.5f,y_,0)
+
+           /*
+           new Vector3(0,0.5f,0),
+           new Vector3(0,0,0),
+           new Vector3(0.5f,0,0),
+           new Vector3(0.5f,0.5f,0),
+           new Vector3(1f,1f,0),
+           new Vector3(1f,0.5f,0)
+           */
+       };
+
+        triangles = new int[]
+        {
+            //0,2,1
+            1,2,0
+            //0,2,1,0,3,2 quad
+            //0,2,1,0,3,2,4,5,3 weird shape but correct
+
+            //2,1,0,3,5,4
+            //1,0,3,4,5,2
+            //2,1,0,3,4,5,1,2,3
+           // 0,3,4,5,2,1
+            //2,1,5,4,3,0
+            //0,3,4,5,1,2
+            //0, 1, 2,3,4,5    
+        };
     }
     // Update is called once per frame
     void Update()
@@ -51,25 +87,49 @@ public class meshGenerator : MonoBehaviour
     {
         vertices = new Vector3[]
         {
+            /*
             new Vector3(0,0.5f,0),
             new Vector3(0,0,0),
             new Vector3(0.5f,0,0),
             new Vector3(0.5f,0.5f,0),
-            new Vector3(0.75f,0.75f,0),
+            new Vector3(1f,1f,0),
             new Vector3(1f,0.5f,0)
+            */
 
-            
+            /* for quad
+            new Vector3(0,2,0),
+            new Vector3(0,0,0),
+            new Vector3(2,0,0),
+            new Vector3(2,2,0)
+             */
+
+            //below for weird shape
+            /*
+            new Vector3(0,2,0),
+            new Vector3(0,0,0),
+            new Vector3(2,0,0),
+            new Vector3(2,2,0)
+            //new Vector3(4,4,0),
+            //new Vector3(4,2,0)
+            */
             /*
             new Vector3(0,0.5f,0),
             new Vector3(0.5f,0.5f,0),
             new Vector3(0.5f,0,0)
             */
+            new Vector3(0,0.5f,0),
+            new Vector3(0,0,0),
+            new Vector3(0.5f,0,0)
+
         };
 
         triangles = new int[]
         {
             //0,2,1
-            0,2,1,0,3,2,4,5,3
+            0,2,1
+            //0,2,1,0,3,2 quad
+            //0,2,1,0,3,2,4,5,3 weird shape but correct
+
             //2,1,0,3,5,4
             //1,0,3,4,5,2
             //2,1,0,3,4,5,1,2,3

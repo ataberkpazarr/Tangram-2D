@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5080417486163571342}
   m_Layer: 0
   m_Name: pointPrefab
-  m_TagString: Untagged
+  m_TagString: gridPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
